@@ -9,7 +9,9 @@
 #include "Components/STUHealthComponent.h"
 #include "Components/TextRenderComponent.h"
 
-// Sets default values
+
+DEFINE_LOG_CATEGORY_STATIC(BaseCharacterLog, All, All);
+
 ASTUBaseCharacter::ASTUBaseCharacter(const FObjectInitializer& ObjInit) 
 	: Super(ObjInit.SetDefaultSubobjectClass<USTUCharacterMovementComponent>(ACharacter::CharacterMovementComponentName))
 {
@@ -29,14 +31,12 @@ ASTUBaseCharacter::ASTUBaseCharacter(const FObjectInitializer& ObjInit)
 	HealthTextComponent->SetupAttachment(GetRootComponent());
 }
 
-// Called when the game starts or when spawned
 void ASTUBaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
 	check(HealthComponent);
 	check(HealthTextComponent);
-	
 }
 
 void ASTUBaseCharacter::Tick(float DeltaTime)
@@ -47,7 +47,7 @@ void ASTUBaseCharacter::Tick(float DeltaTime)
 	HealthTextComponent->SetText(FText::FromString(FString::Printf(TEXT("%.0f"), Health)));
 }
 
-// Called to bind functionality to input
+
 void ASTUBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
